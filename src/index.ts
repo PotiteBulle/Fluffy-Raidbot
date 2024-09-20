@@ -17,7 +17,7 @@ const client = new Client({
 
 // Préparation du Bot & Connexion
 client.once('ready', () => {
-    console.log('Connecté en tant que ${lient.user?.tag}') // Affiche un message lorsque le bot est prêt
+    console.log(`Connecté en tant que ${client.user?.tag}`);// Affiche un message lorsque le bot est prêt
 });
 
 // Écoute l'événement lorsqu'un nouveau membre rejoint le serveur
