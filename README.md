@@ -59,3 +59,8 @@ Les contributions sont les bienvenues !
 
 ## Licence
 Ce projet est sous licence MIT. Vous êtes libre de l'utiliser et de le modifier tant que vous respectez les termes de la licence.
+
+
+## Test & fonctionnement
+![alt text](image.png)
+![alt text](image-1.png)
