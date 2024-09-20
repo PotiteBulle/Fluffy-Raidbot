@@ -1,0 +1,18 @@
+# Ignorer le fichier des variables d'environnement
+.env
+
+# Ignorer les fichiers de logs générés par le bot
+logs/
+
+# Ignorer le dossier des modules Node.js
+node_modules/
+
+# Ignorer le dossier de sotrie TypeScript
+dist/
+
+# Ignorer les fichier lock de Bun
+bun.lockb
+
+# Ignorer les fichiers de configuration de l'éditeur (Si applicable)
+.vscode/
+.idea/
