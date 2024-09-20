@@ -1,0 +1,26 @@
+{
+  "compilerOptions": {
+    // Activer les dernières fonctionnalités
+    "lib": ["ESNext", "DOM"],
+    "target": "ESNext",
+    "module": "ESNext",
+    "jsx": "react-jsx",
+    
+    // Configurations spécifiques à Bun
+    "moduleResolution": "node",
+    "allowJs": false, // Si tu n'utilises pas de fichiers JavaScript
+    "noEmit": true, // Ne pas émettre de fichiers compilés
+
+    // Bonnes pratiques
+    "strict": true,
+    "skipLibCheck": true,
+    "noFallthroughCasesInSwitch": true,
+
+    // Options plus strictes
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noPropertyAccessFromIndexSignature": false
+  },
+  "include": ["src/**/*.ts"], // Inclure tous les fichiers TypeScript dans le dossier src
+  "exclude": ["node_modules", "dist"] // Exclure les fichiers non pertinents
+}
