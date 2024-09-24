@@ -3,7 +3,8 @@ bot de modération anti-raid pour Discord qui protéger un serveur contre les ra
 
 
 ## Description
-Ce bot Discord est conçu pour protéger les serveurs contre les raids (attaques de masse) en détectant un afflux important de nouveaux membres et en verrouillant les salons texte publics pour empêcher le spam. Il détecte automatiquement un raid et active un mode de sécurité qui désactive l'envoi de messages dans les salons. Après un certain délai (Fixé de base à 30 minutes), le mode de protection est désactivé et les salons sont rétablis à la normale.
+Ce bot Discord est conçu pour protéger les serveurs contre les raids (attaques de masse) en détectant un afflux important de nouveaux membres et en verrouillant les salons texte publics pour empêcher le spam. 
+Il détecte automatiquement un raid et active un mode de sécurité qui désactive l'envoi de messages dans les salons. Après un certain délai (Fixé de base à 30 minutes), le mode de protection est désactivé et les salons sont rétablis à la normale.
 
 ## Fonctionnalités
 - Détection de raid : Surveille le nombre de nouveaux membres rejoignant le serveur sur une courte période.
