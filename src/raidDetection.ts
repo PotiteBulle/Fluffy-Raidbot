@@ -68,5 +68,5 @@ async function logRaidEvent(event: string) {
     const logPath = join(process.cwd(), 'logs', 'raid_logs.txt');
     const logMessage = `${new Date().toISOString()} - ${event}\n`;
     await fs.appendFile(logPath, logMessage);
-    console.log('Raid enregistré dans le log.');
+    console.log('Raid enregistré dans la log.');
 }
