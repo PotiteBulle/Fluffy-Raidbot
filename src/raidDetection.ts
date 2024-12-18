@@ -3,7 +3,7 @@ import { promises as fs } from 'node:fs';
 import { join } from 'node:path';
 
 // Paramètres
-const NEW_MEMBERS_LIMIT = 5; // Si 5 personnes arrivent d'un coup > 'Suspected Raid'
+const NEW_MEMBERS_LIMIT = 10; // Si 10 personnes arrivent d'un coup > 'Suspected Raid'
 const RAID_RESET_TIME = 300000; // 5 minutes (intervales)
 const RAID_MODE_DURATION = 1800000; // 30 minutes (temps du mode sécurité)
 
@@ -33,40 +33,48 @@ export function handleNewMember(member: GuildMember) {
 
 // Activer le mode RAID
 async function activateRaidMode(guild: Guild) {
-    console.log('RAID détecté ! Activation du mode sécurité.');
-    await logRaidEvent(`RAID détecté sur le serveur : ${guild.name}`);
+    try {
+        console.log('RAID détecté ! Activation du mode sécurité.');
+        await logRaidEvent(`RAID détecté sur le serveur : ${guild.name}`);
 
-    guild.channels.cache.forEach((channel) => {
-        if (channel instanceof TextChannel) {
-            channel.permissionOverwrites.edit(guild.id, {
-                SendMessages: false,
-            });
-        }
-    });
+        // Mise à jour des permissions des canaux
+        await Promise.all(guild.channels.cache
+            .filter((channel) => channel instanceof TextChannel)
+            .map((channel) => channel.permissionOverwrites.edit(guild.id, { SendMessages: false }))
+        );
 
-    setTimeout(() => deactivateRaidMode(guild), RAID_MODE_DURATION);
+        setTimeout(() => deactivateRaidMode(guild), RAID_MODE_DURATION);
+    } catch (error) {
+        console.error('Erreur lors de l\'activation du mode RAID:', error);
+    }
 }
 
 // Désactiver le mode RAID
 async function deactivateRaidMode(guild: Guild) {
-    console.log('Fin du mode RAID. Réactivation des salons.');
-    await logRaidEvent(`Fin du mode RAID sur le serveur : ${guild.name}`);
+    try {
+        console.log('Fin du mode RAID. Réactivation des salons.');
+        await logRaidEvent(`Fin du mode RAID sur le serveur : ${guild.name}`);
 
-    guild.channels.cache.forEach((channel) => {
-        if (channel instanceof TextChannel) {
-            channel.permissionOverwrites.edit(guild.id, {
-                SendMessages: true,
-            });
-        }
-    });
+        // Réactiver les permissions des canaux
+        await Promise.all(guild.channels.cache
+            .filter((channel) => channel instanceof TextChannel)
+            .map((channel) => channel.permissionOverwrites.edit(guild.id, { SendMessages: true }))
+        );
 
-    raidDetected = false;
+        raidDetected = false;
+    } catch (error) {
+        console.error('Erreur lors de la désactivation du mode RAID:', error);
+    }
 }
 
 // Enregistrer l'événement de raid
 async function logRaidEvent(event: string) {
     const logPath = join(process.cwd(), 'logs', 'raid_logs.txt');
     const logMessage = `${new Date().toISOString()} - ${event}\n`;
-    await fs.appendFile(logPath, logMessage);
-    console.log('Raid enregistré dans la log.');
+    try {
+        await fs.appendFile(logPath, logMessage);
+        console.log('Raid enregistré dans la log.');
+    } catch (error) {
+        console.error('Erreur lors de l\'enregistrement de l\'événement:', error);
+    }
 }
